@@ -1,5 +1,6 @@
 package org.example.vmsproject.repository;
 
+import org.example.vmsproject.entity.Product;
 import org.example.vmsproject.entity.Warehouse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +21,5 @@ public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
 
     void deleteWarehouseByWarehouseId(Long id);
 
+    Warehouse findWarehouseByProducts(Product product);
 }

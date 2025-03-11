@@ -31,7 +31,11 @@ public enum ErrorCode {
     EMAIL_EXISTS(1018, "Email exists",  HttpStatus.BAD_REQUEST),
     ROUTE_NOT_FOUND(1018, "Route not found",  HttpStatus.BAD_REQUEST),
     LICENSE_NUMBER_EXISTS(1018, "License number exists",  HttpStatus.BAD_REQUEST),
-    LICENSE_PLATE_EXISTS(1018, "License plate exists",  HttpStatus.BAD_REQUEST);
+    LICENSE_PLATE_EXISTS(1018, "License plate exists",  HttpStatus.BAD_REQUEST),
+    CANNOT_UPDATE_SHIPMENT(1018, "Cannot update shipment Item",  HttpStatus.BAD_REQUEST),
+    CANNOT_DELETE_SHIPMENT(1018, "Cannot delete shipment Item",  HttpStatus.BAD_REQUEST),
+    SHIPMENT_ITEM_NOT_FOUND(1018, "Shipment Item not found",  HttpStatus.BAD_REQUEST),
+    WAREHOUSE_NOT_FOUND(1018, "Warehouse not found",  HttpStatus.BAD_REQUEST);
     ;
 
 

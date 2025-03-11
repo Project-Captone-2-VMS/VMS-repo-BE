@@ -20,6 +20,7 @@ public class ShipmentItem {
     private String shipmentItemName;
     private double price;
     private int quantity;
+    private boolean status;
 
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)

@@ -37,8 +37,5 @@ public class Driver {
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
     private User user;
-//
-//    @OneToMany(mappedBy = "driver")
-//    private List<VehicleExpense>expenses;
 
 }
