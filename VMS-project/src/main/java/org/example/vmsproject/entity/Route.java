@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -29,8 +31,9 @@ public class Route {
     private String startLocationName;
     private String endLocationName;
     private Boolean status = Boolean.FALSE;
-    private Date routeDate;
-    private Time routeTime;
+    private LocalDate routeDate;
+    private LocalTime startTime;
+    private LocalTime endTime;
     private String polyne;
 
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -3,12 +3,16 @@ package org.example.vmsproject.service;
 import org.example.vmsproject.entity.Route;
 import org.springframework.data.domain.Page;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public interface RouteService {
-    String findSequence(double startLat, double startLng, String destinations, double endLat, double endLng, long driverId, long vehicleId);
+    String findSequence(double startLat, double startLng, String destinations, double endLat, double endLng, long driverId, long vehicleId, LocalDate startDate, LocalTime timeStart);
 
     String getRoute(double startLat, double startLng, double endLat, double endLng);
 

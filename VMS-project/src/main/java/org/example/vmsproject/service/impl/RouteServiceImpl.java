@@ -20,13 +20,13 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class RouteServiceImpl implements RouteService {
@@ -55,23 +55,23 @@ public class RouteServiceImpl implements RouteService {
 
 
     @Override
-    public String findSequence(double startLat, double startLng, String destinations, double endLat, double endLng, long driverId, long vehicleId) {
+    public String findSequence(double startLat, double startLng, String destinations, double endLat, double endLng, long driverId, long vehicleId, LocalDate startDate, LocalTime timeStart) {
         ZonedDateTime dataTime = ZonedDateTime.now(ZoneOffset.UTC);
         String departure = dataTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX"));
 
-        //Xử lý để tạo lộ trình đi bằng api của HereMap thông qua URL
+        // Xây dựng URL gọi API findsequence2 với tham số alternatives=2 để trả về 2 tuyến đường (nếu có)
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://wps.hereapi.com/v8/findsequence2")
                 .queryParam("start", startLat + "," + startLng)
                 .queryParam("end", endLat + "," + endLng)
                 .queryParam("improveFor", "time")
                 .queryParam("departure", departure)
                 .queryParam("mode", "fastest;car;traffic:enabled")
+                .queryParam("alternatives", 2)
                 .queryParam("apikey", apiKey);
 
         // Xử lý chuỗi destinations và thêm vào builder
         if (destinations != null && !destinations.isEmpty()) {
             String[] destinationArray = destinations.split(",");
-
             // Kiểm tra để đảm bảo số lượng phần tử chẵn
             if (destinationArray.length % 2 == 0) {
                 for (int i = 0; i < destinationArray.length; i += 2) {
@@ -87,17 +87,13 @@ public class RouteServiceImpl implements RouteService {
 
         String jsonRespone = restTemplate.getForObject(url, String.class);
 
-
-
         try {
-            creatRoute(jsonRespone,driverId,vehicleId);
+            creatRoute(jsonRespone, driverId, vehicleId, startDate, timeStart);
             return "Create Route Successfully";
         } catch (Exception e) {
             return "Create Route Failed " + e.getMessage();
         }
-
     }
-
     public String getAddressFromCoordinates(double lat, double lng) {
         String url = "https://revgeocode.search.hereapi.com/v1/revgeocode";
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
@@ -124,7 +120,7 @@ public class RouteServiceImpl implements RouteService {
 
 
 
-    private void creatRoute(String jsonRespone, Long driverId, Long vehicleId) throws JsonProcessingException {
+    private void creatRoute(String jsonRespone, Long driverId, Long vehicleId, LocalDate startDate, LocalTime timeStart) throws JsonProcessingException {
         // Parse JSON thành đối tượng Java
         ObjectMapper mapper = new ObjectMapper();
         ApiRouteResponse apiRouteResponse = mapper.readValue(jsonRespone, ApiRouteResponse.class);
@@ -142,6 +138,8 @@ public class RouteServiceImpl implements RouteService {
             route.setStartLng(waypoints.get(0).getLng());
             route.setEndLat(waypoints.get(waypoints.size() - 1).getLat());
             route.setEndLng(waypoints.get(waypoints.size() - 1).getLng());
+            route.setStartTime(timeStart);
+            route.setRouteDate(startDate);
             String startLocationName = getAddressFromCoordinates(
                     waypoints.get(0).getLat(),
                     waypoints.get(0).getLng()

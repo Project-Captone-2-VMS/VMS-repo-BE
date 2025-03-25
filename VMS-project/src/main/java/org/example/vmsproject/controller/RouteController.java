@@ -41,7 +41,9 @@ public class RouteController {
                 request.getEndLat(),
                 request.getEndLng(),
                 request.getDriverId(),
-                request.getVehicleId()
+                request.getVehicleId(),
+                request.getStartDate(),
+                request.getStartTime()
         );
 
         return ResponseEntity.ok(result);
