@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface RouteService {
-    String findSequence(double startLat, double startLng, String destinations, double endLat, double endLng, long driverId, long vehicleId, LocalDate startDate, LocalTime timeStart);
+    String findSequence(double startLat, double startLng, String destinations, double endLat, double endLng, long driverId, long vehicleId, LocalDate startDate, LocalTime timeStart, String polyline);
 
     String getRoute(double startLat, double startLng, double endLat, double endLng);
 

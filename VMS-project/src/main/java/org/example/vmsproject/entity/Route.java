@@ -34,7 +34,8 @@ public class Route {
     private LocalDate routeDate;
     private LocalTime startTime;
     private LocalTime endTime;
-    private String polyne;
+    @Column(name = "polyline", columnDefinition = "TEXT")
+    private String polyline;
 
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Waypoint> waypoints;

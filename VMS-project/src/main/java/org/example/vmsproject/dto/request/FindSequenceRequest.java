@@ -21,4 +21,5 @@ public class FindSequenceRequest {
     private Long vehicleId;
     private LocalDate startDate;
     private LocalTime startTime;
+    private String polyline;
 }

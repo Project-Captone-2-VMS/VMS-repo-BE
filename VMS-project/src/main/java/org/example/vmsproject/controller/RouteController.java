@@ -43,7 +43,8 @@ public class RouteController {
                 request.getDriverId(),
                 request.getVehicleId(),
                 request.getStartDate(),
-                request.getStartTime()
+                request.getStartTime(),
+                request.getPolyline()
         );
 
         return ResponseEntity.ok(result);

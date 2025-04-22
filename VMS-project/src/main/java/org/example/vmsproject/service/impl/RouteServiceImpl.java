@@ -55,7 +55,7 @@ public class RouteServiceImpl implements RouteService {
 
 
     @Override
-    public String findSequence(double startLat, double startLng, String destinations, double endLat, double endLng, long driverId, long vehicleId, LocalDate startDate, LocalTime timeStart) {
+    public String findSequence(double startLat, double startLng, String destinations, double endLat, double endLng, long driverId, long vehicleId, LocalDate startDate, LocalTime timeStart, String polyline) {
         ZonedDateTime dataTime = ZonedDateTime.now(ZoneOffset.UTC);
         String departure = dataTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX"));
 
@@ -88,7 +88,7 @@ public class RouteServiceImpl implements RouteService {
         String jsonRespone = restTemplate.getForObject(url, String.class);
 
         try {
-            creatRoute(jsonRespone, driverId, vehicleId, startDate, timeStart);
+            creatRoute(jsonRespone, driverId, vehicleId, startDate, timeStart,polyline);
             return "Create Route Successfully";
         } catch (Exception e) {
             return "Create Route Failed " + e.getMessage();
@@ -120,7 +120,7 @@ public class RouteServiceImpl implements RouteService {
 
 
 
-    private void creatRoute(String jsonRespone, Long driverId, Long vehicleId, LocalDate startDate, LocalTime timeStart) throws JsonProcessingException {
+    private void creatRoute(String jsonRespone, Long driverId, Long vehicleId, LocalDate startDate, LocalTime timeStart, String polyline) throws JsonProcessingException {
         // Parse JSON thành đối tượng Java
         ObjectMapper mapper = new ObjectMapper();
         ApiRouteResponse apiRouteResponse = mapper.readValue(jsonRespone, ApiRouteResponse.class);
@@ -140,6 +140,7 @@ public class RouteServiceImpl implements RouteService {
             route.setEndLng(waypoints.get(waypoints.size() - 1).getLng());
             route.setStartTime(timeStart);
             route.setRouteDate(startDate);
+            route.setPolyline(polyline);
             String startLocationName = getAddressFromCoordinates(
                     waypoints.get(0).getLat(),
                     waypoints.get(0).getLng()
