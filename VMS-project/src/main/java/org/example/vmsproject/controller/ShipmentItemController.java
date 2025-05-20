@@ -7,6 +7,8 @@ import org.example.vmsproject.service.impl.ShipmentItemService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/shipment-items")
 @RequiredArgsConstructor
@@ -32,6 +34,11 @@ public class ShipmentItemController {
     public ResponseEntity<Void> deleteShipmentItem(@PathVariable Long id) {
         shipmentItemService.deleteShipmentItem(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("findAll")
+    public ResponseEntity<List<ShipmentItem>> getAllShipmentItems() {
+        List<ShipmentItem> items = shipmentItemService.getAllShipmentItems();
+        return ResponseEntity.ok(items);
     }
 
 

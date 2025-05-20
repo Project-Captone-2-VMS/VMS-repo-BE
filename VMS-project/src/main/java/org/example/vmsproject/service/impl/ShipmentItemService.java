@@ -15,6 +15,7 @@ import org.example.vmsproject.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -118,6 +119,10 @@ public class ShipmentItemService {
         existingItem.setRoute(route);
 
         return shipmentItemRepository.save(existingItem);
+    }
+
+    public List<ShipmentItem> getAllShipmentItems() {
+        return shipmentItemRepository.findAll();
     }
 
 
