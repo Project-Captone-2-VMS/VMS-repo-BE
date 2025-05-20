@@ -16,4 +16,10 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     int findTotalVehicles();
 
     boolean existsByLicensePlate(String licensePlate);
+
+    @Query("SELECT v FROM Vehicle v WHERE v.vehicleId NOT IN (SELECT r.vehicle.vehicleId FROM Route r)")
+    List<Vehicle> findVehiclesWithNoRoutes();
+
+    @Query("SELECT DISTINCT v FROM Vehicle v JOIN Route r ON v.vehicleId = r.vehicle.vehicleId")
+    List<Vehicle> findVehiclesWithRoutes();
 }

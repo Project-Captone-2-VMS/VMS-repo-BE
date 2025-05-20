@@ -50,4 +50,12 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
 
     Driver findAllByUserUsername(String username);
 
+
+        @Query("SELECT d FROM Driver d WHERE d.driverId NOT IN (SELECT r.driver.driverId FROM Route r)")
+        List<Driver> findDriversWithNoRoutes();
+
+        @Query("SELECT DISTINCT d FROM Driver d JOIN Route r ON d.driverId = r.driver.driverId")
+        List<Driver> findDriversWithRoutes();
+
+
 }

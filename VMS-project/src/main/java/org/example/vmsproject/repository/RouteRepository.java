@@ -40,5 +40,9 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
     List<Route> findRoutesByUsernameDone(@Param("username") String username);
     Page<Route> findByStatus(boolean status, Pageable pageable);
 
+    int countByStatus(Boolean status);
+
+    List<Route> findAllByStatusTrue();
+
 
 }
