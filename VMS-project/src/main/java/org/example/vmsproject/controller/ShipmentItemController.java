@@ -22,7 +22,7 @@ public class ShipmentItemController {
         return ResponseEntity.ok(savedItem);
 
     }
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<ShipmentItem> updateShipmentItem(
             @PathVariable Long id,
             @RequestBody ShipmentItemRequest request) {
@@ -30,12 +30,12 @@ public class ShipmentItemController {
         return ResponseEntity.ok(updatedItem);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteShipmentItem(@PathVariable Long id) {
         shipmentItemService.deleteShipmentItem(id);
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("findAll")
+    @GetMapping("/findAll")
     public ResponseEntity<List<ShipmentItem>> getAllShipmentItems() {
         List<ShipmentItem> items = shipmentItemService.getAllShipmentItems();
         return ResponseEntity.ok(items);
