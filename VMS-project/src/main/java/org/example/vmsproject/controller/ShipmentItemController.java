@@ -1,6 +1,7 @@
 package org.example.vmsproject.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.vmsproject.dto.ShipmentItemDTO;
 import org.example.vmsproject.dto.request.ShipmentItemRequest;
 import org.example.vmsproject.entity.ShipmentItem;
 import org.example.vmsproject.service.impl.ShipmentItemService;
@@ -35,11 +36,12 @@ public class ShipmentItemController {
         shipmentItemService.deleteShipmentItem(id);
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/findAll")
-    public ResponseEntity<List<ShipmentItem>> getAllShipmentItems() {
-        List<ShipmentItem> items = shipmentItemService.getAllShipmentItems();
+    @GetMapping("findAll")
+    public ResponseEntity<List<ShipmentItemDTO>> getAllShipmentItems() {
+        List<ShipmentItemDTO> items = shipmentItemService.getAllShipmentItems();
         return ResponseEntity.ok(items);
     }
+
 
 
 }

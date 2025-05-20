@@ -1,6 +1,7 @@
 package org.example.vmsproject.service.impl;
 
 import jakarta.transaction.Transactional;
+import org.example.vmsproject.dto.ShipmentItemDTO;
 import org.example.vmsproject.dto.request.ShipmentItemRequest;
 import org.example.vmsproject.entity.Product;
 import org.example.vmsproject.entity.Route;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ShipmentItemService {
@@ -121,8 +123,19 @@ public class ShipmentItemService {
         return shipmentItemRepository.save(existingItem);
     }
 
-    public List<ShipmentItem> getAllShipmentItems() {
-        return shipmentItemRepository.findAll();
+    public List<ShipmentItemDTO> getAllShipmentItems() {
+        return shipmentItemRepository.findAll()
+                .stream()
+                .map(item -> new ShipmentItemDTO(
+                        item.getShipmentItemId(),
+                        item.getShipmentItemName(),
+                        item.getPrice(),
+                        item.getQuantity(),
+                        item.getStatus(),
+                        item.getWarehouse().getWarehouseId(),
+                        item.getRoute().getRouteId()
+                ))
+                .collect(Collectors.toList());
     }
 
 
