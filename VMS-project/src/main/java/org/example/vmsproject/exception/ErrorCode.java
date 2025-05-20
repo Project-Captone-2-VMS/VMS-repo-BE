@@ -31,7 +31,8 @@ public enum ErrorCode {
     EMAIL_EXISTS(1018, "Email exists",  HttpStatus.BAD_REQUEST),
     ROUTE_NOT_FOUND(1018, "Route not found",  HttpStatus.BAD_REQUEST),
     LICENSE_NUMBER_EXISTS(1018, "License number exists",  HttpStatus.BAD_REQUEST),
-    LICENSE_PLATE_EXISTS(1018, "License plate exists",  HttpStatus.BAD_REQUEST);
+    LICENSE_PLATE_EXISTS(1018, "License plate exists",  HttpStatus.BAD_REQUEST),
+    WAREHOUSE_NOT_FOUND(1018, "Warehouse not found",  HttpStatus.NOT_FOUND);
     ;
 
 
