@@ -44,7 +44,7 @@ public class DashboardService {
     }
 
     public long getInactiveVehiclesCount() {
-        return vehicleRepository.findVehicleByStatusFalse().size();
+        return vehicleRepository.findVehicleByStatusTrue().size();
     }
 
     public List<Vehicle> getInactiveVehicles() {
@@ -52,14 +52,14 @@ public class DashboardService {
     }
 
     public long getActiveVehiclesCount() {
-        return vehicleRepository.findVehicleByStatusTrue().size();
+        return vehicleRepository.findVehicleByStatusFalse().size();
     }
 
     public List<Vehicle> getActiveVehicles() {
         return vehicleRepository.findVehiclesWithRoutes();
     }
 
-    public long getActiveDriversCount() {return driverRepository.findAllDriverByStatusTrue().size();
+    public long getActiveDriversCount() {return driverRepository.findAllDriverByStatusFalse().size();
     }
 
     public List<Driver> getActiveDrivers() {
@@ -67,7 +67,7 @@ public class DashboardService {
     }
 
     public long getInactiveDriversCount() {
-        return driverRepository.findAllDriverByStatusFalse().size();
+        return driverRepository.findAllDriverByStatusTrue().size();
     }
 
     public List<Driver> getInactiveDrivers() {
