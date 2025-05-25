@@ -22,5 +22,6 @@ public interface DriverService {
     int totalOnDeliverys();
     int totalAvailables();
     int totalWeeks();
+    List<Driver> getDriverByUserId(long id);
 
 }
