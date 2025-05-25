@@ -216,7 +216,7 @@ public class RouteServiceImpl implements RouteService {
 
 
     public Route updateActiveRoute(long routeId) {
-        Route route = rogit uteRepository.findById(routeId).orElseThrow(()-> new AppException(ErrorCode.ROUTE_NOT_FOUND));
+        Route route = routeRepository.findById(routeId).orElseThrow(()-> new AppException(ErrorCode.ROUTE_NOT_FOUND));
         route.setStatus(true);
         route.getDriver().setStatus(false);
         route.getVehicle().setStatus(false);
