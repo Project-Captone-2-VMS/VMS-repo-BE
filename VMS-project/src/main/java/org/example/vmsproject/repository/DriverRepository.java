@@ -57,5 +57,8 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
         @Query("SELECT DISTINCT d FROM Driver d JOIN Route r ON d.driverId = r.driver.driverId")
         List<Driver> findDriversWithRoutes();
 
+        List<Driver> findAllDriverByStatusTrue();
+        List<Driver> findAllDriverByStatusFalse();
+
 
 }

@@ -221,9 +221,11 @@ public class RouteServiceImpl implements RouteService {
         route.getDriver().setStatus(false);
         route.getVehicle().setStatus(false);
         routeRepository.save(route);
-        ShipmentItem shipmentItem = shipmentItemRepository.findShipmentByRoute(route);
-        shipmentItem.setStatus(true);
-        shipmentItemRepository.save(shipmentItem);
+        List<ShipmentItem> shipmentItemList = shipmentItemRepository.findAllShipmentByRoute(route);
+        for(ShipmentItem shipmentItem:shipmentItemList) {
+            shipmentItem.setStatus(true);
+            shipmentItemRepository.save(shipmentItem);
+        }
         return route;
 
     }

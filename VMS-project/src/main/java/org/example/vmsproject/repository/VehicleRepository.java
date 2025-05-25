@@ -22,4 +22,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     @Query("SELECT DISTINCT v FROM Vehicle v JOIN Route r ON v.vehicleId = r.vehicle.vehicleId")
     List<Vehicle> findVehiclesWithRoutes();
+
+    List<Vehicle>findVehicleByStatusTrue();
+    List<Vehicle>findVehicleByStatusFalse();
 }

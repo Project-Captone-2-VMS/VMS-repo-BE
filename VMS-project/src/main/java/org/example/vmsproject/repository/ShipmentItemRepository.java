@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ShipmentItemRepository extends JpaRepository<ShipmentItem, Long> {
     List<ShipmentItem> findAllByRouteRouteId(Long routeId);
-    ShipmentItem findShipmentByRoute(Route route);
+    List<ShipmentItem> findAllShipmentByRoute(Route route);
 
 }
 

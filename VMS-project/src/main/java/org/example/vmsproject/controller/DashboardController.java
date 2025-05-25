@@ -48,18 +48,29 @@ public class DashboardController {
         return ResponseEntity.ok(dashboardService.getInactiveVehiclesCount());
     }
 
-    @GetMapping("/vehicles/inactive")
-    public ResponseEntity<List<Vehicle>> getInactiveVehicles() {
-        return ResponseEntity.ok(dashboardService.getInactiveVehicles());
-    }
-
     @GetMapping("/vehicles/active/count")
     public ResponseEntity<Long> getActiveVehiclesCount() {
         return ResponseEntity.ok(dashboardService.getActiveVehiclesCount());
     }
 
-    @GetMapping("/vehicles/active")
-    public ResponseEntity<List<Vehicle>> getActiveVehicles() {
-        return ResponseEntity.ok(dashboardService.getActiveVehicles());
+    @GetMapping("/drivers/active/count")
+    public ResponseEntity<Long> getActiveDriversCount() {
+        return ResponseEntity.ok(dashboardService.getActiveDriversCount());
     }
+
+    @GetMapping("/drivers/inactive/count")
+    public ResponseEntity<Long> getInActiveDriversCount() {
+        return ResponseEntity.ok(dashboardService.getInactiveDriversCount());
+    }
+
+
+//    @GetMapping("/vehicles/active")
+//    public ResponseEntity<List<Vehicle>> getActiveVehicles() {
+//        return ResponseEntity.ok(dashboardService.getActiveVehicles());
+//    }
+
+    //    @GetMapping("/vehicles/inactive")
+//    public ResponseEntity<List<Vehicle>> getInactiveVehicles() {
+//        return ResponseEntity.ok(dashboardService.getInactiveVehicles());
+//    }
 }

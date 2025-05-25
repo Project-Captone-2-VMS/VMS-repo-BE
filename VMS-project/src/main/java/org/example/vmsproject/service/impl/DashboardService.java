@@ -7,6 +7,7 @@ import org.example.vmsproject.entity.Vehicle;
 import org.example.vmsproject.repository.DriverRepository;
 import org.example.vmsproject.repository.RouteRepository;
 import org.example.vmsproject.repository.VehicleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +16,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DashboardService {
 
-    private final DriverRepository driverRepository;
-    private final VehicleRepository vehicleRepository;
-    private final RouteRepository routeRepository;
+    @Autowired
+    private DriverRepository driverRepository;
+    @Autowired
+    private VehicleRepository vehicleRepository;
+    @Autowired
+    private RouteRepository routeRepository;
 
     public long getTotalDrivers() {
         return driverRepository.count();
@@ -40,7 +44,7 @@ public class DashboardService {
     }
 
     public long getInactiveVehiclesCount() {
-        return vehicleRepository.findVehiclesWithNoRoutes().size();
+        return vehicleRepository.findVehicleByStatusFalse().size();
     }
 
     public List<Vehicle> getInactiveVehicles() {
@@ -48,15 +52,14 @@ public class DashboardService {
     }
 
     public long getActiveVehiclesCount() {
-        return vehicleRepository.findVehiclesWithRoutes().size();
+        return vehicleRepository.findVehicleByStatusTrue().size();
     }
 
     public List<Vehicle> getActiveVehicles() {
         return vehicleRepository.findVehiclesWithRoutes();
     }
 
-    public long getActiveDriversCount() {
-        return driverRepository.findDriversWithRoutes().size();
+    public long getActiveDriversCount() {return driverRepository.findAllDriverByStatusTrue().size();
     }
 
     public List<Driver> getActiveDrivers() {
@@ -64,7 +67,7 @@ public class DashboardService {
     }
 
     public long getInactiveDriversCount() {
-        return driverRepository.findDriversWithNoRoutes().size();
+        return driverRepository.findAllDriverByStatusFalse().size();
     }
 
     public List<Driver> getInactiveDrivers() {
