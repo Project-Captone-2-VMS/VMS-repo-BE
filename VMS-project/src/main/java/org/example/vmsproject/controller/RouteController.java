@@ -50,11 +50,11 @@ public class RouteController {
         return ResponseEntity.ok(result);
     }
 
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<?> updateActive(@PathVariable("id") Long id) {
-//        Route results = routeService.updateActiveRoute(id);
-//        return ResponseEntity.ok(results);
-//    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateActive(@PathVariable("id") Long id) {
+        Route results = routeService.updateActiveRoute(id);
+        return ResponseEntity.ok(results);
+    }
 
     @GetMapping("")
     public List<Route> getAllRoutesNoActive() {

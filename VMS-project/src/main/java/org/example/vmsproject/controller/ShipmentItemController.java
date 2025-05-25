@@ -36,7 +36,7 @@ public class ShipmentItemController {
         shipmentItemService.deleteShipmentItem(id);
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("findAll")
+    @GetMapping("/findAll")
     public ResponseEntity<List<ShipmentItemDTO>> getAllShipmentItems() {
         List<ShipmentItemDTO> items = shipmentItemService.getAllShipmentItems();
         return ResponseEntity.ok(items);

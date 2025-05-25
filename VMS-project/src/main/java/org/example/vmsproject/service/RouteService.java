@@ -1,6 +1,9 @@
 package org.example.vmsproject.service;
 
 import org.example.vmsproject.entity.Route;
+import org.example.vmsproject.entity.ShipmentItem;
+import org.example.vmsproject.exception.AppException;
+import org.example.vmsproject.exception.ErrorCode;
 import org.springframework.data.domain.Page;
 
 import java.sql.Time;
@@ -33,4 +36,6 @@ public interface RouteService {
     List<Route> getAllRouteByUserName(String username);
 
     Page<Route> getAllRoute(boolean status, int page);
+
+    Route updateActiveRoute(long routeId);
 }

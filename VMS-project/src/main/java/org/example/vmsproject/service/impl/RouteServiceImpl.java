@@ -40,7 +40,9 @@ public class RouteServiceImpl implements RouteService {
     @Autowired
     private InterconnectionRepository interconnectionRepository;
 
-//    private ShipmentRepository shipmentRepository;
+    @Autowired
+    private ShipmentItemRepository shipmentItemRepository;
+
     private RestTemplate restTemplate = new RestTemplate();
 
     @Autowired
@@ -212,19 +214,19 @@ public class RouteServiceImpl implements RouteService {
         return restTemplate.getForObject(url, String.class);
     }
 
-//    @Override
-//    public Route updateActiveRoute(long routeId) {
-//        Route route = routeRepository.findById(routeId).orElseThrow(()-> new AppException(ErrorCode.ROUTE_NOT_FOUND));
-//        route.setStatus(true);
-//        route.getDriver().setStatus(false);
-//        route.getVehicle().setStatus(false);
-//        routeRepository.save(route);
-//        Shipment shipment = shipmentRepository.findShipmentByRoute(route);
-//        shipment.setStatus(true);
-//        shipmentRepository.save(shipment);
-//        return route;
-//
-//    }
+
+    public Route updateActiveRoute(long routeId) {
+        Route route = rogit uteRepository.findById(routeId).orElseThrow(()-> new AppException(ErrorCode.ROUTE_NOT_FOUND));
+        route.setStatus(true);
+        route.getDriver().setStatus(false);
+        route.getVehicle().setStatus(false);
+        routeRepository.save(route);
+        ShipmentItem shipmentItem = shipmentItemRepository.findShipmentByRoute(route);
+        shipmentItem.setStatus(true);
+        shipmentItemRepository.save(shipmentItem);
+        return route;
+
+    }
 
     @Override
     public List<Route> getAllRouteNoActive() {
