@@ -166,4 +166,8 @@ public class DriverServiceImpl implements DriverService {
     public int totalWeeks() {
         return driverRepository.findTotalWeeks();
     }
+    @Override
+    public List<Driver> getDriverByUserId(long id) {
+        return driverRepository.findUserByUserId(id);
+    }
 }

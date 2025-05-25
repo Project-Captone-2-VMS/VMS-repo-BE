@@ -3,6 +3,8 @@ package org.example.vmsproject.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.vmsproject.entity.Route;
+import org.example.vmsproject.entity.Warehouse;
 
 @Data
 @AllArgsConstructor
@@ -13,8 +15,8 @@ public class ShipmentItemDTO {
     private double price;
     private int quantity;
     private Boolean status;
-    private Long warehouseId;
-    private Long routeId;
+    private Warehouse warehouse;
+    private Route route;
 
 
 }

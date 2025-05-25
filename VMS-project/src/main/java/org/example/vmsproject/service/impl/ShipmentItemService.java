@@ -132,8 +132,8 @@ public class ShipmentItemService {
                         item.getPrice(),
                         item.getQuantity(),
                         item.getStatus(),
-                        item.getWarehouse().getWarehouseId(),
-                        item.getRoute().getRouteId()
+                        item.getWarehouse(),
+                        item.getRoute()
                 ))
                 .collect(Collectors.toList());
     }

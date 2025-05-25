@@ -99,4 +99,12 @@ public class DriverController {
         return ResponseEntity.ok(driver);
     }
 
+    @GetMapping("/userId/{id}")
+    public ResponseEntity<Driver> getDriverByUserId(@PathVariable("id") long id) {
+        List<Driver> drivers = driverService.getDriverByUserId(id);
+        return drivers.isEmpty()
+                ? ResponseEntity.notFound().build()
+                : ResponseEntity.ok(drivers.get(0));
+    }
+
 }
