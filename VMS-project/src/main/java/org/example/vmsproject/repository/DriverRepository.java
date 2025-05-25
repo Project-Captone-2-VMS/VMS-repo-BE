@@ -60,5 +60,7 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
         List<Driver> findAllDriverByStatusTrue();
         List<Driver> findAllDriverByStatusFalse();
 
+        List<Driver> findUserByUserId(Long userId);
+
 
 }
